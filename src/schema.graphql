@@ -1,0 +1,177 @@
+type Attribute {
+  name: String!
+  values: [String]!
+}
+
+"""An user's saved cart session. Only one cart can be active at a time"""
+type Cart {
+  """Owner of the cart session"""
+  owner: User!
+
+  """Items saved in the cart session"""
+  items: [ProductVariant]
+  subtotal: Float!
+}
+
+"""Returns information about a specific purchase"""
+type Order {
+  """
+  Each order has a unique id which is separate from the user or items they bought
+  """
+  id: ID!
+
+  """The user who made the purchase"""
+  buyer: User!
+
+  """
+  A list of all the items they purchased. This is the Variants, not the Products so we know exactly which
+  product and which size/color/feature was bought
+  """
+  items: [ProductVariant!]!
+}
+
+"""Search filters for when showing an users previous purchases"""
+input OrderFilters {
+  orderId: ID!
+  priceHigh: Float
+  priceLow: Float
+  itemsInOrder: Int
+}
+
+type PaymentMethod {
+  id: ID!
+  cardNumber: String!
+}
+
+"""
+A specific product sold by our store. This contains all the high level details but is not the purchasable item.
+See Variant for more info.
+"""
+type Product {
+  id: ID!
+  name: String!
+  sku: String!
+  description: String
+  images: [String]
+  price: Float!
+  attributes: [Attribute]
+  variants: [ProductVariant]
+  featured: Boolean!
+  shortDescription: String
+}
+
+"""Available categories that a product can be classified as"""
+enum ProductCategory {
+  CLOTHING
+  TOPS
+  BOTTOMS
+  COLLECTIONS
+  WOMEN
+  MEN
+  HOODIES
+  SHORTS
+  PERFORMANCE
+  UNDERWEAR
+  ECO
+  PROMOTIONS
+  PANTS
+  RECOMMENDATIONS
+  TEES
+  YOGA
+}
+
+"""Search filters for when returning Products"""
+input ProductSearchInput {
+  """Specify part of the title of the product"""
+  titleContains: String
+
+  """Limit the number of items returned"""
+  limit: Int
+
+  """Specify a set of categories that the product is a part of"""
+  categories: [ProductCategory]
+  featured: Boolean
+}
+
+"""
+A variant of a product which is a unique combination of attributes like size and color
+Variants are the entities that are added to carts and purchased
+"""
+type ProductVariant {
+  id: ID!
+
+  """Price in decimals for this variant"""
+  price: Float!
+
+  """Link back to the parent Product SKU"""
+  parent: Product
+
+  """Optional color option for this variant"""
+  colorway: String
+
+  """Optional size option for this variant"""
+  size: String
+
+  """Variant is available for purchase"""
+  inStock: Boolean!
+}
+
+type Query {
+  users: [User]
+  user(id: ID!): User
+
+  """
+  Get a specific order by id. Meant to be used for a detailed view of an order
+  """
+  order(id: ID!): Order
+
+  """
+  Get all available products to shop for. Optionally provide some search filters
+  """
+  searchProducts(searchInput: ProductSearchInput! = {}): [Product]!
+
+  """Get all featured products to be listed"""
+  getFeaturedProducts(limit: Int): [Product]!
+
+  """Get products based on a single category"""
+  getProductsByCategory(category: ProductCategory!, limit: Int): [Product]!
+
+  """
+  Get all available variants of products to shop for. Optionally provide some search filters
+  """
+  searchProductVariants(searchInput: VariantSearchInput! = {}): [ProductVariant]!
+
+  """
+  Get a specific product by id. Useful for the product details page or checkout page
+  """
+  product(id: ID!): Product
+
+  """
+  Get a specific variant by id. Useful for the product details page or checkout page
+  """
+  productVariant(id: ID!): ProductVariant
+}
+
+"""An user account in our system"""
+type User {
+  id: ID!
+  firstName: String
+  lastName: String
+  address: String
+  phone: String
+  email: String!
+
+  """
+  The user's active cart session. Once the cart items have been purchases, they transition to an Order
+  """
+  activeCart: Cart
+
+  """The users previous purchases"""
+  orders(filters: OrderFilters): [Order]
+  paymentMethods: [PaymentMethod]
+}
+
+"""Search filters for when returning Variants"""
+input VariantSearchInput {
+  sizeStartsWith: String
+}

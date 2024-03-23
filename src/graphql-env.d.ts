@@ -1,0 +1,43 @@
+/* eslint-disable */
+/* prettier-ignore */
+
+/** An IntrospectionQuery representation of your schema.
+ *
+ * @remarks
+ * This is an introspection of your schema saved as a file by GraphQLSP.
+ * It will automatically be used by `gql.tada` to infer the types of your GraphQL documents.
+ * If you need to reuse this data or update your `scalars`, update `tadaOutputLocation` to
+ * instead save to a .ts instead of a .d.ts file.
+ */
+export type introspection = {
+  query: 'Query';
+  mutation: never;
+  subscription: never;
+  types: {
+    'Attribute': { kind: 'OBJECT'; name: 'Attribute'; fields: { 'name': { name: 'name'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'String'; ofType: null; }; } }; 'values': { name: 'values'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'LIST'; name: never; ofType: { kind: 'SCALAR'; name: 'String'; ofType: null; }; }; } }; }; };
+    'String': unknown;
+    'Cart': { kind: 'OBJECT'; name: 'Cart'; fields: { 'owner': { name: 'owner'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'OBJECT'; name: 'User'; ofType: null; }; } }; 'items': { name: 'items'; type: { kind: 'LIST'; name: never; ofType: { kind: 'OBJECT'; name: 'ProductVariant'; ofType: null; }; } }; 'subtotal': { name: 'subtotal'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'Float'; ofType: null; }; } }; }; };
+    'Float': unknown;
+    'Order': { kind: 'OBJECT'; name: 'Order'; fields: { 'id': { name: 'id'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'ID'; ofType: null; }; } }; 'buyer': { name: 'buyer'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'OBJECT'; name: 'User'; ofType: null; }; } }; 'items': { name: 'items'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'LIST'; name: never; ofType: { kind: 'NON_NULL'; name: never; ofType: { kind: 'OBJECT'; name: 'ProductVariant'; ofType: null; }; }; }; } }; }; };
+    'ID': unknown;
+    'OrderFilters': { kind: 'INPUT_OBJECT'; name: 'OrderFilters'; inputFields: [{ name: 'orderId'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'ID'; ofType: null; }; }; defaultValue: null }, { name: 'priceHigh'; type: { kind: 'SCALAR'; name: 'Float'; ofType: null; }; defaultValue: null }, { name: 'priceLow'; type: { kind: 'SCALAR'; name: 'Float'; ofType: null; }; defaultValue: null }, { name: 'itemsInOrder'; type: { kind: 'SCALAR'; name: 'Int'; ofType: null; }; defaultValue: null }]; };
+    'Int': unknown;
+    'PaymentMethod': { kind: 'OBJECT'; name: 'PaymentMethod'; fields: { 'id': { name: 'id'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'ID'; ofType: null; }; } }; 'cardNumber': { name: 'cardNumber'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'String'; ofType: null; }; } }; }; };
+    'Product': { kind: 'OBJECT'; name: 'Product'; fields: { 'id': { name: 'id'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'ID'; ofType: null; }; } }; 'name': { name: 'name'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'String'; ofType: null; }; } }; 'sku': { name: 'sku'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'String'; ofType: null; }; } }; 'description': { name: 'description'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; 'images': { name: 'images'; type: { kind: 'LIST'; name: never; ofType: { kind: 'SCALAR'; name: 'String'; ofType: null; }; } }; 'price': { name: 'price'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'Float'; ofType: null; }; } }; 'attributes': { name: 'attributes'; type: { kind: 'LIST'; name: never; ofType: { kind: 'OBJECT'; name: 'Attribute'; ofType: null; }; } }; 'variants': { name: 'variants'; type: { kind: 'LIST'; name: never; ofType: { kind: 'OBJECT'; name: 'ProductVariant'; ofType: null; }; } }; 'featured': { name: 'featured'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'Boolean'; ofType: null; }; } }; 'shortDescription': { name: 'shortDescription'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; }; };
+    'Boolean': unknown;
+    'ProductCategory': { kind: 'ENUM'; name: 'ProductCategory'; type: 'CLOTHING' | 'TOPS' | 'BOTTOMS' | 'COLLECTIONS' | 'WOMEN' | 'MEN' | 'HOODIES' | 'SHORTS' | 'PERFORMANCE' | 'UNDERWEAR' | 'ECO' | 'PROMOTIONS' | 'PANTS' | 'RECOMMENDATIONS' | 'TEES' | 'YOGA'; };
+    'ProductSearchInput': { kind: 'INPUT_OBJECT'; name: 'ProductSearchInput'; inputFields: [{ name: 'titleContains'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; }; defaultValue: null }, { name: 'limit'; type: { kind: 'SCALAR'; name: 'Int'; ofType: null; }; defaultValue: null }, { name: 'categories'; type: { kind: 'LIST'; name: never; ofType: { kind: 'ENUM'; name: 'ProductCategory'; ofType: null; }; }; defaultValue: null }, { name: 'featured'; type: { kind: 'SCALAR'; name: 'Boolean'; ofType: null; }; defaultValue: null }]; };
+    'ProductVariant': { kind: 'OBJECT'; name: 'ProductVariant'; fields: { 'id': { name: 'id'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'ID'; ofType: null; }; } }; 'price': { name: 'price'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'Float'; ofType: null; }; } }; 'parent': { name: 'parent'; type: { kind: 'OBJECT'; name: 'Product'; ofType: null; } }; 'colorway': { name: 'colorway'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; 'size': { name: 'size'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; 'inStock': { name: 'inStock'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'Boolean'; ofType: null; }; } }; }; };
+    'Query': { kind: 'OBJECT'; name: 'Query'; fields: { 'users': { name: 'users'; type: { kind: 'LIST'; name: never; ofType: { kind: 'OBJECT'; name: 'User'; ofType: null; }; } }; 'user': { name: 'user'; type: { kind: 'OBJECT'; name: 'User'; ofType: null; } }; 'order': { name: 'order'; type: { kind: 'OBJECT'; name: 'Order'; ofType: null; } }; 'searchProducts': { name: 'searchProducts'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'LIST'; name: never; ofType: { kind: 'OBJECT'; name: 'Product'; ofType: null; }; }; } }; 'getFeaturedProducts': { name: 'getFeaturedProducts'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'LIST'; name: never; ofType: { kind: 'OBJECT'; name: 'Product'; ofType: null; }; }; } }; 'getProductsByCategory': { name: 'getProductsByCategory'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'LIST'; name: never; ofType: { kind: 'OBJECT'; name: 'Product'; ofType: null; }; }; } }; 'searchProductVariants': { name: 'searchProductVariants'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'LIST'; name: never; ofType: { kind: 'OBJECT'; name: 'ProductVariant'; ofType: null; }; }; } }; 'product': { name: 'product'; type: { kind: 'OBJECT'; name: 'Product'; ofType: null; } }; 'productVariant': { name: 'productVariant'; type: { kind: 'OBJECT'; name: 'ProductVariant'; ofType: null; } }; }; };
+    'User': { kind: 'OBJECT'; name: 'User'; fields: { 'id': { name: 'id'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'ID'; ofType: null; }; } }; 'firstName': { name: 'firstName'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; 'lastName': { name: 'lastName'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; 'address': { name: 'address'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; 'phone': { name: 'phone'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; 'email': { name: 'email'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'String'; ofType: null; }; } }; 'activeCart': { name: 'activeCart'; type: { kind: 'OBJECT'; name: 'Cart'; ofType: null; } }; 'orders': { name: 'orders'; type: { kind: 'LIST'; name: never; ofType: { kind: 'OBJECT'; name: 'Order'; ofType: null; }; } }; 'paymentMethods': { name: 'paymentMethods'; type: { kind: 'LIST'; name: never; ofType: { kind: 'OBJECT'; name: 'PaymentMethod'; ofType: null; }; } }; }; };
+    'VariantSearchInput': { kind: 'INPUT_OBJECT'; name: 'VariantSearchInput'; inputFields: [{ name: 'sizeStartsWith'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; }; defaultValue: null }]; };
+  };
+};
+
+import * as gqlTada from 'gql.tada';
+
+declare module 'gql.tada' {
+  interface setupSchema {
+    introspection: introspection
+  }
+}
