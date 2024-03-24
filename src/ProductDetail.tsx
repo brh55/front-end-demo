@@ -1,4 +1,4 @@
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, useSubscription, gql } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { graphql, readFragment } from 'gql.tada'; 
 import { Card, Image, Text, Button, Group, Grid, Divider, Title } from '@mantine/core';
@@ -36,6 +36,7 @@ const GET_PRODUCT = graphql(`
     }
   }
 `);
+
 
 const unique = (value, index, array) => array.indexOf(value) === index;
 
