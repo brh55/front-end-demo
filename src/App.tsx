@@ -1,28 +1,37 @@
 import './App.css'
-import '@mantine/core/styles.css';
 
-import { createTheme, MantineProvider } from '@mantine/core';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { Routes, Route, Outlet, Link } from "react-router-dom";
 
-import Demo from './Demo';
-
-const theme = createTheme({});
-
-const client = new ApolloClient({
-  uri: 'https://ecom-demo-router-z7dpe2fvra-ue.a.run.app/',
-  cache: new InMemoryCache(),
-});
+import Listing from './Listing';
+import ProductDetail from './ProductDetail';
 
 function App() {
   return (
     <>
-      <MantineProvider theme={theme}>
-        <ApolloProvider client={client}>
-          <Demo />
-        </ApolloProvider>
-      </MantineProvider>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Listing />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+          {/* Using path="*"" means "match anything", so this route
+                acts like a catch-all for URLs that we don't have explicit
+                routes for. */}
+          <Route path="*" element={<Listing />} />
+        </Route>
+      </Routes>
     </>
+  )
+};
+
+function Layout() {
+  return (
+    <div>
+      <nav>
+        <Link to="/"></Link>
+      </nav>
+
+      <Outlet />
+    </div>
   )
 }
 
-export default App
+export default App;
