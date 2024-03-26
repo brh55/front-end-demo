@@ -12,6 +12,7 @@
   "dependencies": {
     "@apollo/client": "^3.9.9",
     "@mantine/core": "^7.6.2",
+    "@mantine/form": "^7.6.2",
     "@mantine/hooks": "^7.6.2",
     "gql.tada": "^1.4.1",
     "graphql": "^16.8.1",

@@ -1,15 +1,17 @@
 import './App.css'
 import 'react-toastify/dist/ReactToastify.css';
 
+import { useEffect } from 'react';
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { useSubscription } from '@apollo/client';
 import { graphql } from 'gql.tada';
 import { ToastContainer, toast } from 'react-toastify';
-import { Grid, Image, Text } from '@mantine/core';
+import { Grid, Image, Text, Group} from '@mantine/core';
 
 import Listing from './Listing';
 import ProductDetail from './ProductDetail';
-import { useEffect } from 'react';
+import Classes from './Classes';
+
 
 const REVIEWS_SUBSCRIPTION = graphql(`
 subscription Reviews {
@@ -27,33 +29,21 @@ subscription Reviews {
 }
 `);
 
-// {
-//   onData: ({ data }) => {
-//     const review = data.data?.reviewAdded;
-
-//     toast(
-//       <>
-//         <Image src={review?.product.images?.[0]} height={75} fit="contain" />
-//         <Text>{review?.user?.firstName} left a review on {review?.product.name}</Text>
-//       </>
-//     );
-//   }
-// });
 
 function App() {
-  const { data } = useSubscription(REVIEWS_SUBSCRIPTION);
+  // const { data } = useSubscription(REVIEWS_SUBSCRIPTION);
 
-  useEffect(() => {
-    if (data) {
-      toast(
-        <>
-          <Image src={data.reviewAdded?.product.images?.[0]} height={75} fit="contain" />
-          <Text>{data.reviewAdded?.user?.firstName} left a review on {data?.reviewAdded?.product.name}</Text>
-          <Text>{data.reviewAdded?.body}</Text>
-        </>
-      );
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     toast(
+  //       <>
+  //         <Image src={data.reviewAdded?.product.images?.[0]} height={75} fit="contain" />
+  //         <Text>{data.reviewAdded?.user?.firstName} left a review on {data?.reviewAdded?.product.name}</Text>
+  //         <Text>{data.reviewAdded?.body}</Text>
+  //       </>
+  //     );
+  //   }
+  // }, [data]);
 
   return (
     <>
@@ -61,6 +51,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Listing />} />
           <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/classes" element={<Classes />} />
           {/* Using path="*"" means "match anything", so this route
                 acts like a catch-all for URLs that we don't have explicit
                 routes for. */}
@@ -79,7 +70,10 @@ function Layout() {
   return (
     <div>
       <nav>
-        <Link to="/">Home</Link>
+        <Group gap={4}>
+          <Link to="/">Home</Link>
+          <Link to="/classes">Classes</Link>
+        </Group>
       </nav>
 
       <Outlet />

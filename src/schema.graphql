@@ -13,6 +13,28 @@ type Cart {
   subtotal: Float!
 }
 
+type Class {
+  id: ID!
+  name: String!
+  description: String!
+  attendees: [User]!
+}
+
+input ClassDetails {
+  name: String!
+  description: String!
+  price: Float!
+  attendees: [ID]
+}
+
+type Mutation {
+  """
+  Get a specific order by id. Meant to be used for a detailed view of an order
+  """
+  createClass(class: ClassDetails!): Class
+  updateClass(id: ID!, class: ClassDetails!): Class
+}
+
 """Returns information about a specific purchase"""
 type Order {
   """
@@ -117,6 +139,11 @@ type ProductVariant {
 }
 
 type Query {
+  """
+  Get a specific order by id. Meant to be used for a detailed view of an order
+  """
+  getClassById(id: ID!): Class
+  classes: [Class]
   users: [User]
   user(id: ID!): User
 
@@ -170,6 +197,7 @@ type Subscription {
 """An user account in our system"""
 type User {
   id: ID!
+  classes: [Class]!
   firstName: String
   lastName: String
   address: String

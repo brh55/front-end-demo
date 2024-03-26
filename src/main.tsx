@@ -13,6 +13,7 @@ const theme = createTheme({});
 const client = new ApolloClient({
   uri: 'https://summit-router-final-j3nprurqka-ue.a.run.app/',
   cache: new InMemoryCache(),
+  connectToDevTools: true,
 });
 
 import './index.css';

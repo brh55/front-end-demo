@@ -42,7 +42,7 @@ const unique = (value, index, array) => array.indexOf(value) === index;
 
 function ProductDetail() {
     const params = useParams();
-    const { id = '' } = params;
+    const { id = "" } = params;
 
     const { loading, error, data } = useQuery(GET_PRODUCT, { variables: 
         {
