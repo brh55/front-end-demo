@@ -1,6 +1,6 @@
 import { useQuery, useSubscription, gql } from '@apollo/client';
 import { useParams } from 'react-router-dom';
-import { graphql, readFragment } from 'gql.tada'; 
+import { graphql } from 'gql.tada'; 
 import { Card, Image, Text, Button, Group, Grid, Divider, Title } from '@mantine/core';
 
 // Without Tada but using a GraphQL LSP
@@ -15,6 +15,9 @@ import { Card, Image, Text, Button, Group, Grid, Divider, Title } from '@mantine
 //             price
 //             inStock
 //         }
+//         user {
+//             lastName
+//         }
 //     }
 // `;
 
@@ -25,13 +28,11 @@ const GET_PRODUCT = graphql(`
         name
         images
         description
-        ...@defer {
-            variants {
-                colorway
-                id
-                price
-                size
-            }
+        variants {
+            colorway
+            id
+            price
+            size
         }
     }
   }
@@ -92,7 +93,8 @@ function ProductDetail() {
       
 
                     <Divider my="md" />
-                    <Text>{product?.description}</Text>
+                    {/* should purify your HTML prior, but for demo purposes */}
+                    <Text dangerouslySetInnerHTML={{__html: product?.description || ""}}></Text>
                 
                     <Divider my="md"/>
                     <Card>

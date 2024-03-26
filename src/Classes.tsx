@@ -16,6 +16,8 @@ const CLASS_PAGE_QUERY = graphql(`
             description
             attendees {
                 id
+                lastName
+                firstName
             }
         }
     }
@@ -91,19 +93,19 @@ function Classes() {
                     attendees: values.attendees
                 }
             },
-            optimisticResponse: {
-                __typename: 'Mutation',
-                createClass: {
-                    __typename: "Class",
-                    id: `temp-class-1`,
-                    description: values.description,
-                    name: values.name,
-                    attendees: values.attendees.map((attendee: string) => ({
-                        id: attendee,
-                        __typename: "User",
-                    }))
-                }
-            }
+            // optimisticResponse: {
+            //     __typename: 'Mutation',
+            //     createClass: {
+            //         __typename: "Class",
+            //         id: `temp-class-1`,
+            //         description: values.description,
+            //         name: values.name,
+            //         attendees: values.attendees.map((attendee: string) => ({
+            //             id: attendee,
+            //             __typename: "User",
+            //         }))
+            //     }
+            // }
         });
 
         form.reset();
@@ -144,6 +146,11 @@ function Classes() {
                                 <Text size="sm">{classItem?.description}</Text>
                                 
                                 <Text size="sm" fw={700}>Attendees: {classItem?.attendees?.length}</Text>
+                                { 
+                                    classItem?.attendees?.map((attendee: any) => (
+                                        <Text key={attendee?.id} size="xs">{attendee?.firstName} {attendee?.lastName}</Text>)
+                                    ) 
+                                }
                             </Card.Section>
                         </Card>
                     </Grid.Col>

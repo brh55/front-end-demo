@@ -13,21 +13,21 @@ import ProductDetail from './ProductDetail';
 import Classes from './Classes';
 
 
-const REVIEWS_SUBSCRIPTION = graphql(`
-subscription Reviews {
-  reviewAdded {
-    body
-    id
-    product {
-      images
-      name
-    }
-    user {
-      firstName
-    }
-  }
-}
-`);
+// const REVIEWS_SUBSCRIPTION = graphql(`
+// subscription Reviews {
+//   reviewAdded {
+//     body
+//     id
+//     product {
+//       images
+//       name
+//     }
+//     user {
+//       firstName
+//     }
+//   }
+// }
+// `);
 
 
 function App() {
