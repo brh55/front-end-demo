@@ -4,7 +4,7 @@ import { graphql } from 'gql.tada';
 import { Card, Image, Text, Button, Group, Grid, Divider, Title } from '@mantine/core';
 
 // Without Tada but using a GraphQL LSP
-// const GET_PRODUCTS = gql`
+// const ProductDetailPage = gql`
 //     product(id: $productId) {
 //         name
 //         images
@@ -23,7 +23,7 @@ import { Card, Image, Text, Button, Group, Grid, Divider, Title } from '@mantine
 
 //  LSP + Tada -> infer Variable and Results on the fly
 const GET_PRODUCT = graphql(`
-  query GetProduct($productId: ID!) {
+  query ProductDetailPage($productId: ID!) {
     product(id: $productId) {
         name
         images
