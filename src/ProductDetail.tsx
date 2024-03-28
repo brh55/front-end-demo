@@ -3,26 +3,8 @@ import { useParams } from 'react-router-dom';
 import { graphql } from 'gql.tada'; 
 import { Card, Image, Text, Button, Group, Grid, Divider, Title } from '@mantine/core';
 
-// Without Tada but using a GraphQL LSP
-// const ProductDetailPage = gql`
-//     product(id: $productId) {
-//         name
-//         images
-//         description
-//         variants {
-//             colorway
-//             size
-//             price
-//             inStock
-//         }
-//         user {
-//             lastName
-//         }
-//     }
-// `;
-
 //  LSP + Tada -> infer Variable and Results on the fly
-const GET_PRODUCT = graphql(`
+const PDP_QUERY = graphql(`
   query ProductDetailPage($productId: ID!) {
     product(id: $productId) {
         name
@@ -45,7 +27,7 @@ function ProductDetail() {
     const params = useParams();
     const { id = "" } = params;
 
-    const { loading, error, data } = useQuery(GET_PRODUCT, { variables: 
+    const { loading, error, data } = useQuery(PDP_QUERY, { variables: 
         {
             productId: id
         }
@@ -97,8 +79,6 @@ function ProductDetail() {
                     <Text dangerouslySetInnerHTML={{__html: product?.description || ""}}></Text>
                 
                     <Divider my="md"/>
-                    <Card>
-                    </Card>
                 </Grid.Col>
             </Grid>
         </div>

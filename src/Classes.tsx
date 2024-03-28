@@ -25,7 +25,7 @@ const CLASS_PAGE_QUERY = graphql(`
 
 const ADD_CLASS = graphql(`
     mutation CreateClass($input: ClassDetails!) {
-        createClass(class: $input) {
+        createClass(classDetails: $input) {
             id
             name
             description
@@ -92,20 +92,7 @@ function Classes() {
                     price: values.price,
                     attendees: values.attendees
                 }
-            },
-            // optimisticResponse: {
-            //     __typename: 'Mutation',
-            //     createClass: {
-            //         __typename: "Class",
-            //         id: `temp-class-1`,
-            //         description: values.description,
-            //         name: values.name,
-            //         attendees: values.attendees.map((attendee: string) => ({
-            //             id: attendee,
-            //             __typename: "User",
-            //         }))
-            //     }
-            // }
+            }
         });
 
         form.reset();

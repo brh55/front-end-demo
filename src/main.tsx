@@ -14,6 +14,8 @@ const client = new ApolloClient({
   uri: 'https://summit-router-final-j3nprurqka-ue.a.run.app/',
   cache: new InMemoryCache(),
   connectToDevTools: true,
+  name: 'front-end-demo',
+  version: '1.5'
 });
 
 import './index.css';

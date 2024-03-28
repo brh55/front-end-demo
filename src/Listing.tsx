@@ -3,9 +3,9 @@ import { graphql } from 'gql.tada';
 import { Card, Image, Text, Button, Group, Grid } from '@mantine/core';
 import { Link } from 'react-router-dom';
 
-// Without Tada but using a GraphQL LSP
-// const GET_PRODUCTS = gql`
-//     query GetProducts($searchInput: ProductSearchInput) {
+// 🪄 Without Tada but using a GraphQL LSP
+// const PRODUCT_LISTING_QUERY = gql`
+//     query ListingProductPage($searchInput: ProductSearchInput) {
 //         searchProducts(searchInput: $searchInput) {
 //             id
 //             name
@@ -16,9 +16,9 @@ import { Link } from 'react-router-dom';
 //     }
 // `;
 
-//  LSP + Tada -> infer Variable and Results on the fly
-const GET_PRODUCTS = graphql(`
-  query GetProducts($searchInput: ProductSearchInput!) {
+//  🪄 LSP + Tada -> infer Variable and Results on the fly
+const PRODUCT_LISTING_QUERY = graphql(`
+  query ListingProductPage($searchInput: ProductSearchInput!) {
     searchProducts(searchInput: $searchInput) {
         id
         name
@@ -30,7 +30,7 @@ const GET_PRODUCTS = graphql(`
 `);
 
 function Listing() {
-    const { loading, error, data } = useQuery(GET_PRODUCTS, { variables: 
+    const { loading, error, data } = useQuery(PRODUCT_LISTING_QUERY, { variables: 
         {
             searchInput: {
               categories: [ "MEN" ],
