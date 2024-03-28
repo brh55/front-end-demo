@@ -71,14 +71,32 @@ See Variant for more info.
 """
 type Product {
   id: ID!
+
+  """Product name"""
   name: String!
   sku: String!
+
+  """Product description"""
   description: String
+
+  """Product thumbnails with image urls"""
   images: [String]
+
+  """
+  Price of product based on primary variant, variants are individually price
+  """
   price: Float!
+
+  """Various product attributes (i.e size, color, materials)"""
   attributes: [Attribute]
+
+  """Available product variants for parent product"""
   variants: [ProductVariant]
+
+  """Product is marked to be featured by content team"""
   featured: Boolean!
+
+  """Shorter description of product, max 100 characters"""
   shortDescription: String
 }
 
