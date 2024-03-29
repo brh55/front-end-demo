@@ -4,30 +4,30 @@ import { Card, Image, Text, Button, Group, Grid } from '@mantine/core';
 import { Link } from 'react-router-dom';
 
 // 🪄 Without Tada but using a GraphQL LSP
-// const PRODUCT_LISTING_QUERY = gql`
-//     query ListingProductPage($searchInput: ProductSearchInput) {
-//         searchProducts(searchInput: $searchInput) {
-//             id
-//             name
-//             images
-//             price
-//             shortDescription  
-//         }
-//     }
-// `;
+const PRODUCT_LISTING_QUERY = gql`
+    query ListingProductPage($searchInput: ProductSearchInput) {
+        searchProducts(searchInput: $searchInput) {
+            id
+            name
+            images
+            price
+            shortDescription  
+        }
+    }
+`;
 
 //  🪄 LSP + Tada -> infer Variable and Results on the fly
-const PRODUCT_LISTING_QUERY = graphql(`
-  query ListingProductPage($searchInput: ProductSearchInput!) {
-    searchProducts(searchInput: $searchInput) {
-        id
-        name
-        images
-        price
-        shortDescription
-    }
-  }
-`);
+// const PRODUCT_LISTING_QUERY = graphql(`
+//   query ListingProductPage($searchInput: ProductSearchInput!) {
+//     searchProducts(searchInput: $searchInput) {
+//         id
+//         name
+//         images
+//         price
+//         shortDescription
+//     }
+//   }
+// `);
 
 function Listing() {
     const { loading, error, data } = useQuery(PRODUCT_LISTING_QUERY, { variables: 
@@ -47,7 +47,7 @@ function Listing() {
             <Text size="md" fw={700}>Product Listing</Text>
             <Grid>
             { data?.searchProducts.map(product => (
-                <Grid.Col span={4}>
+                <Grid.Col key={product?.id} span={4}>
                     <Link to={`/product/${product?.id}`}>
                         <Card shadow="sm" padding="lg" radius="md" withBorder>
                             <Card.Section>

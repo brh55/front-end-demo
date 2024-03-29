@@ -55,27 +55,9 @@ function Classes() {
         ADD_CLASS,
         {
             update(cache, { data: { createClass } }) {
-                cache.modify({
-                    fields: {
-                        classes(existingClasses = []) {
-                            const newClassRef = cache.writeFragment({
-                                data: createClass,
-                                fragment: gql`
-                                  fragment NewClass on Class {
-                                    id
-                                    description
-                                    name
-                                    attendees {
-                                        id
-                                    }
-                                  }
-                                `
-                            });
-
-                            return [...existingClasses, newClassRef];
-                        }
-                    }
-                })
+                const data = { ...cache.readQuery({ query: CLASS_PAGE_QUERY })};
+                data.classes = [...data.classes, createClass];
+                cache.writeQuery({ query: CLASS_PAGE_QUERY, data });
             }
         });
 
@@ -91,6 +73,19 @@ function Classes() {
                     description: values.description,
                     price: values.price,
                     attendees: values.attendees
+                }
+            },
+            optimisticResponse: {
+                __typename: 'Mutation',
+                createClass: {
+                    __typename: "Class",
+                    id: `temp-class-1`,
+                    description: values.description,
+                    name: values.name,
+                    attendees: values.attendees.map((attendee: string) => ({
+                        id: attendee,
+                        __typename: "User",
+                    }))
                 }
             }
         });

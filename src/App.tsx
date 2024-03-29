@@ -6,44 +6,43 @@ import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { useSubscription } from '@apollo/client';
 import { graphql } from 'gql.tada';
 import { ToastContainer, toast } from 'react-toastify';
-import { Grid, Image, Text, Group} from '@mantine/core';
+import { Image, Text, Group} from '@mantine/core';
 
 import Listing from './Listing';
 import ProductDetail from './ProductDetail';
 import Classes from './Classes';
 
-
-// const REVIEWS_SUBSCRIPTION = graphql(`
-// subscription Reviews {
-//   reviewAdded {
-//     body
-//     id
-//     product {
-//       images
-//       name
-//     }
-//     user {
-//       firstName
-//     }
-//   }
-// }
-// `);
+const REVIEWS_SUBSCRIPTION = graphql(`
+subscription Reviews {
+  reviewAdded {
+    body
+    id
+    product {
+      images
+      name
+    }
+    user {
+      firstName
+    }
+  }
+}
+`);
 
 
 function App() {
-  // const { data } = useSubscription(REVIEWS_SUBSCRIPTION);
+  const { data } = useSubscription(REVIEWS_SUBSCRIPTION);
 
-  // useEffect(() => {
-  //   if (data) {
-  //     toast(
-  //       <>
-  //         <Image src={data.reviewAdded?.product.images?.[0]} height={75} fit="contain" />
-  //         <Text>{data.reviewAdded?.user?.firstName} left a review on {data?.reviewAdded?.product.name}</Text>
-  //         <Text>{data.reviewAdded?.body}</Text>
-  //       </>
-  //     );
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    if (data) {
+      toast(
+        <>
+          <Image src={data.reviewAdded?.product.images?.[0]} height={75} fit="contain" />
+          <Text>{data.reviewAdded?.user?.firstName} left a review on {data?.reviewAdded?.product.name}</Text>
+          <Text>{data.reviewAdded?.body}</Text>
+        </>
+      );
+    }
+  }, [data]);
 
   return (
     <>

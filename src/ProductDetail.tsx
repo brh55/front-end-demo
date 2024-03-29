@@ -1,10 +1,12 @@
-import { useQuery, useSubscription, gql } from '@apollo/client';
+import { useQuery, gql } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { graphql } from 'gql.tada'; 
-import { Card, Image, Text, Button, Group, Grid, Divider, Title } from '@mantine/core';
+import { Image, Text, Button, Group, Grid, Divider, Title } from '@mantine/core';
 
-//  LSP + Tada -> infer Variable and Results on the fly
-const PDP_QUERY = graphql(`
+const unique = (value, index, array) => array.indexOf(value) === index;
+
+// Query
+const PDP_QUERY = gql`
   query ProductDetailPage($productId: ID!) {
     product(id: $productId) {
         name
@@ -18,10 +20,25 @@ const PDP_QUERY = graphql(`
         }
     }
   }
-`);
+`;
 
+// Tada Query
+// const PDP_QUERY = graphql(`
+//   query ProductDetailPage($productId: ID!) {
+//     product(id: $productId) {
+//         name
+//         images
+//         description
+//         variants {
+//             colorway
+//             id
+//             price
+//             size
+//         }
+//     }
+//   }
+// `);
 
-const unique = (value, index, array) => array.indexOf(value) === index;
 
 function ProductDetail() {
     const params = useParams();
